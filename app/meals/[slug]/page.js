@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
 // Dynamic metadata for the dynamic pages
 export async function generateMetadata({ params }) {
-  const meal = getMeal(params.slug);
+  const meal = await getMeal(params.slug);
 
   if (!meal) {
     notFound();
@@ -17,10 +17,10 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function MealPage({ params }) {
+export default async function MealPage({ params }) {
   const mealId = params.slug;
 
-  const meal = getMeal(mealId);
+  const meal = await getMeal(mealId);
 
   if (!meal) {
     notFound();
